@@ -1,0 +1,320 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IIT Dholakpur | Placement Predictor</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: #2c3e50;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .dholakpur-text {
+            color: #ff9f43; /* Laddoo Orange */
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ff9f43;
+        }
+
+        
+    .hero {
+    height: 80vh;
+
+    background: linear-gradient(rgba(12, 0, 0, 0.6), rgba(3, 1, 1, 0.2)), url("https://github.com/anubhabmondal496-coder/IIT-DHOALAKPUR/blob/main/Gemini_Generated_Image_vucm6zvucm6zvucm.png?raw=true");
+    background-size: cover;
+    background-position: center 60%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    }
+
+        .hero-content h1 { font-size: 3rem; margin-bottom: 10px; }
+        .hero-content h2 { font-size: 1.5rem; margin-bottom: 20px; font-weight: 300; }
+        .orange-text { color: #ff9f43; font-weight: 700; }
+
+        .cta-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #ff9f43;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .cta-button:hover {
+            background: #e67e22;
+            transform: translateY(-3px);
+        }
+
+        /* Stats Section */
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            padding: 40px 10%;
+            background: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .stat-box { text-align: center; min-width: 200px; }
+        .stat-box h3 { font-size: 2.5rem; color: #e67e22; margin-bottom: 5px; }
+
+        /* Departments */
+        .departments { padding: 60px 5%; text-align: center; }
+        .section-title { font-size: 2.5rem; margin-bottom: 40px; color: #2c3e50; }
+        .card-container { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
+        
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 300px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            border-top: 5px solid #ff9f43;
+        }
+        .card:hover { transform: translateY(-10px); }
+        .card .icon { font-size: 3rem; margin-bottom: 15px; }
+
+        /* PLACEMENT PREDICTOR SECTION */
+        .placement-section {
+            background: linear-gradient(135deg, #2c3e50, #4ca1af);
+            padding: 80px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 600px;
+        }
+
+        .placement-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .form-group { margin-bottom: 20px; text-align: left; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; color: #555; }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+
+        .form-group input:focus { border-color: #ff9f43; outline: none; }
+
+        .predict-btn {
+            width: 100%;
+            padding: 15px;
+            background: #ff9f43;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .predict-btn:hover { background: #d35400; }
+
+        /* Result Box Styling */
+        .result-box {
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #d1f2eb; /* Soft Green */
+            border: 2px solid #27ae60;
+            border-radius: 10px;
+            animation: popIn 0.5s ease;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <span class="iit-text">IIT</span> <span class="dholakpur-text">DHOLAKPUR</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#departments">Departments</a></li>
+            <li><a href="#predictor">Predictor</a></li>
+        </ul>
+    </nav>
+
+    <header id="home" class="hero">
+        <div class="hero-content">
+            <h1>Welcome to the Future</h1>
+            <h2>Where <span class="orange-text">Laddoos</span> Meet <span class="orange-text">Machine Learning</span></h2>
+            <p>Established by Raja Indraverma. Powered by Super Computer Jaggu.</p>
+            <a href="#predictor" class="cta-button">Check Your Package</a>
+        </div>
+    </header>
+
+    <section class="stats">
+        <div class="stat-box">
+            <h3>100%</h3>
+            <p>Placement in Pehelwan Corp</p>
+        </div>
+        <div class="stat-box">
+            <h3>200+</h3>
+            <p>Startups by Dholu & Bholu</p>
+        </div>
+        <div class="stat-box">
+            <h3>Infinite</h3>
+            <p>Supply of Tuntun Mausi's Startups</p>
+        </div>
+    </section>
+
+    <section id="departments" class="departments">
+        <h2 class="section-title">Our Top Branches</h2>
+        <div class="card-container">
+            <div class="card">
+                <div class="icon">🏹</div>
+                <h3>Archery & Defense</h3>
+                <p>HOD: Arjun (Guest Lecturer). Learn precision targeting for missile systems.</p>
+            </div>
+            <div class="card">
+                <div class="icon">🧪</div>
+                <h3>Laddoo Engineering</h3>
+                <p>The science of infinite energy. Sponsored by Tuntun Mausi.</p>
+            </div>
+            <div class="card">
+                <div class="icon">🐵</div>
+                <h3>Advanced Primate AI</h3>
+                <p>Neural networks inspired by Jaggu's problem-solving skills.</p>
+            </div>
+            
+            <div class="card">
+                <div class="icon">👷🏻‍♂️</div>
+                <h3>Advanced Mechanical Engineering</h3>
+                <p>HOD: Daku Mangal Singh. Learn precision in Mechanics and build future proof cars.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="predictor" class="placement-section">
+        <div class="placement-container">
+            <h2 class="placement-title">🔮 Oracle of Dholakpur</h2>
+            <p style="margin-bottom: 20px; color: #666;">
+                Enter your details to predict your placement package using our advanced ML Model.
+            </p>
+            
+            <form method="POST" action="">
+                {% csrf_token %} <div class="form-group">
+                    <label for="cgpa">CGPA (Out of 10)</label>
+                    <input type="number" name="cgpa" step="0.1" min="0" max="10" placeholder="e.g. 9.5" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="iq">IQ Level (Chutki Scale)</label>
+                    <input type="number" name="iq" placeholder="e.g. 150" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="branch">Branch</label>
+                    <select name="branch" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px;">
+                        <option value="cse">Computer Science & Engineering</option>
+                        <option value="ece">Electronics & Communication Engineering</option>
+                        <option value="it">Information Technology </option>
+                        <option value="mech">Mechanical Engineering</option>
+                        <option value="elec">Electrical Engineering</option>
+                        <option value="laddoo">Food Technology</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="predict-btn">Predict Package 🚀</button>
+            </form>
+            
+            {% if result %}
+            <div class="result-box">
+                <h3 style="color: #2c3e50; margin: 0;">
+                    Predicted Package: <br>
+                    <span style="color: #27ae60; font-size: 2rem; font-weight: 800;">
+                        {{ result }} LPA
+                    </span>
+                </h3>
+            </div>
+            {% endif %}
+            
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 IIT Dholakpur. All Rights Reserved. | Maintained by Kalia.</p>
+    </footer>
+
+</body>
+</html>
